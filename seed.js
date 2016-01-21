@@ -22,6 +22,19 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
+var Event = Promise.promisifyAll(mongoose.model('Event'));
+
+var seedEvents = function() {
+  return Event.createAsync({
+    date: new Date().getDate() + 5,
+    time: new Date().getHours() + ':00',
+    currLocation: { lat:40.71, long: -73.98 },
+    endLoacation: { lat: 40.75, long: -74 },
+    title: 'First Event',
+    details: 'Yay! this is my first event',
+    transportation: 'train'
+  });
+}
 
 var seedUsers = function () {
 
@@ -36,7 +49,27 @@ var seedUsers = function () {
         }
     ];
 
-    return User.createAsync(users);
+    return User.createAsync(users)
+      .then(function(users) {
+        var usersPromises = [];
+        users.forEach(function(user) {
+          user.events.forEach(function(eventId) {
+            var eventPromise = Event.findById(eventId)
+            .then(function(foundEvent) {
+              foundEvent.user = user._id;
+              return foundEvent.save()
+              .then(function() {
+                console.log('Events updated with users successfully');
+              });
+            })
+            usersPromises.push(eventPromise);
+          });
+        })
+        return Promise.all(usersPromises)
+        .then(function() {
+          return users;
+        });
+      });
 
 };
 

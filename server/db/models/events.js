@@ -16,17 +16,17 @@ var schema = new mongoose.Schema({
     },
     endLocation: {
         lat: {
-            type: Number,
-            required: true
+            type: Number
+            // required: true
         },
         lng: {
-            type: Number,
-            required: true
+            type: Number
+            // required: true
         }
     },
     transportation: {
         type: String,
-        required: true,
+        // required: true,
         enum: ['train', 'walk', 'bike', 'drive']
     },
     title: {

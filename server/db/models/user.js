@@ -5,7 +5,8 @@ var _ = require('lodash');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        unique: true
     },
     password: {
         type: String

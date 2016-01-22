@@ -24,10 +24,13 @@ var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
 var Event = Promise.promisifyAll(mongoose.model('Event'));
 
+var date1 = new Date('January 25, 2016 09:00:00');
+var date2 = new Date('January 26, 2016 07:00:00');
+
 var seedEvents = function() { 
     var events = [
         {
-            date: new Date('January 25, 2016 09:00:00'),
+            date: date1,
             startLocation: {
                 lat: 40.7282239, 
                 lng: -73.7948516
@@ -41,7 +44,7 @@ var seedEvents = function() {
             details: 'Yay! this is my first event'
         },
         {
-            date: new Date('January 25, 2016 07:00:00'),
+            date: date2,
             startLocation: {
                 lat: 40.782222,
                 lng: -74.0091604
@@ -62,7 +65,7 @@ var seedUsers = function (events) {
     
     var users = [
         {
-            email: 'nsiegal@fsa.com',
+            email: 'nsiegel@fsa.com',
             password: 'password',
             events: [events[Math.floor(Math.random()*events.length)]._id]
         },

@@ -29,12 +29,12 @@ var seedEvents = function() {
         {
             date: new Date('January 25, 2016 09:00:00'),
             startLocation: {
-                latitude: 40.7282239, 
-                longitude: -73.7948516
+                lat: 40.7282239, 
+                lng: -73.7948516
             },
             endLocation: {
-                latitude: 40.7050758,
-                longitude: -74.0091604
+                lat: 40.7050758,
+                lng: -74.0091604
             },
             transportation: 'drive',
             title: 'First Event',
@@ -43,12 +43,12 @@ var seedEvents = function() {
         {
             date: new Date('January 25, 2016 07:00:00'),
             startLocation: {
-                latitude: 40.782222,
-                longitude: -74.0091604
+                lat: 40.782222,
+                lng: -74.0091604
             },
             endLocation: {
-                latitude: 40.7050758,
-                longitude: -73.9785551
+                lat: 40.7050758,
+                lng: -73.9785551
             },
             transportation: 'train',
             title: 'Second Event',

@@ -7,19 +7,19 @@ var schema = new mongoose.Schema({
         required: true
     },
     startLocation: {
-        latitude: {
+        lat: {
           type: Number
         },
-        longitude: {
+        lng: {
           type: Number
         }
     },
     endLocation: {
-        latitude: {
+        lat: {
             type: Number,
             required: true
         },
-        longitude: {
+        lng: {
             type: Number,
             required: true
         }

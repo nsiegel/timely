@@ -4,7 +4,9 @@
 
 body {
   background: #fdfdfd;
+  margin:0; padding:0;
 }
+
 
 @mixin clearfix {
   &:after {
@@ -17,6 +19,13 @@ body {
 #main {
   padding-top: 60px;
   margin: 0 auto;
+}
+
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100%;
 }
 
 @import 'directives/main';

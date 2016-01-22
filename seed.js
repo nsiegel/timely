@@ -24,68 +24,109 @@ var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
 var Event = Promise.promisifyAll(mongoose.model('Event'));
 
-var seedEvents = function() {
-  return Event.createAsync({
-    date: new Date().getDate() + 5,
-    time: new Date().getHours() + ':00',
-    currLocation: { lat:40.71, long: -73.98 },
-    endLoacation: { lat: 40.75, long: -74 },
-    title: 'First Event',
-    details: 'Yay! this is my first event',
-    transportation: 'train'
-  });
-}
-
-var seedUsers = function () {
-
-    var users = [
+var seedEvents = function() { 
+    var events = [
         {
-            email: 'testing@fsa.com',
-            password: 'password'
+            date: new Date('January 25, 2016 09:00:00'),
+            startLocation: {
+                latitude: 40.7282239, 
+                longitude: -73.7948516
+            },
+            endLocation: {
+                latitude: 40.7050758,
+                longitude: -74.0091604
+            },
+            transportation: 'drive',
+            title: 'First Event',
+            details: 'Yay! this is my first event'
         },
         {
-            email: 'obama@gmail.com',
-            password: 'potus'
+            date: new Date('January 25, 2016 07:00:00'),
+            startLocation: {
+                latitude: 40.782222,
+                longitude: -74.0091604
+            },
+            endLocation: {
+                latitude: 40.7050758,
+                longitude: -73.9785551
+            },
+            transportation: 'train',
+            title: 'Second Event',
+            details: 'Yay! this is my second event'
+        }
+    ]
+    return Event.createAsync(events);
+};
+
+var seedUsers = function (events) {
+    
+    var users = [
+        {
+            email: 'nsiegal@fsa.com',
+            password: 'password',
+            events: [events[Math.floor(Math.random()*events.length)]._id]
+        },
+        {
+            email: 'jpark@fsa.com',
+            password: 'password',
+            events: [events[Math.floor(Math.random()*events.length)]._id]
         }
     ];
 
     return User.createAsync(users)
-      .then(function(users) {
+    .then(function(users) {
         var usersPromises = [];
         users.forEach(function(user) {
-          user.events.forEach(function(eventId) {
-            var eventPromise = Event.findById(eventId)
-            .then(function(foundEvent) {
-              foundEvent.user = user._id;
-              return foundEvent.save()
-              .then(function() {
-                console.log('Events updated with users successfully');
-              });
-            })
-            usersPromises.push(eventPromise);
-          });
+            user.events.forEach(function(eventId) {
+                var eventPromise = Event.findById(eventId)
+                .then(function(foundEvent) {
+                    foundEvent.user = user._id;
+                    return foundEvent.save()
+                    .then(function() {
+                      console.log('Events updated with users successfully');
+                    });
+                })
+                usersPromises.push(eventPromise);
+            });
         })
         return Promise.all(usersPromises)
         .then(function() {
-          return users;
+            return users;
         });
-      });
-
+    });
 };
 
 connectToDb.then(function () {
-    User.findAsync({}).then(function (users) {
-        if (users.length === 0) {
-            return seedUsers();
-        } else {
-            console.log(chalk.magenta('Seems to already be user data, exiting!'));
-            process.kill(0);
-        }
-    }).then(function () {
-        console.log(chalk.green('Seed successful!'));
+    var savedUsers;
+    var savedEvents;
+    
+    seedEvents()
+    .then(function(events){
+        savedEvents = events;
+        console.log(chalk.green('Events seeded successfully!'));
+        return seedUsers(savedEvents, []);
+    })
+    .then(function(users){
+        savedUsers = users;
+        console.log(chalk.green('Users seeded successfully!'));
         process.kill(0);
-    }).catch(function (err) {
+    })
+    .catch(function (err) {
         console.error(err);
-        process.kill(1);
     });
+
+    // User.findAsync({}).then(function (users) {
+    //     if (users.length === 0) {
+    //         return seedUsers();
+    //     } else {
+    //         console.log(chalk.magenta('Seems to already be user data, exiting!'));
+    //         process.kill(0);
+    //     }
+    // }).then(function () {
+    //     console.log(chalk.green('Seed successful!'));
+    //     process.kill(0);
+    // }).catch(function (err) {
+    //     console.error(err);
+    //     process.kill(1);
+    // });
 });

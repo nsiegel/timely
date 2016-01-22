@@ -2,47 +2,43 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-  date: {
-    type: Date,
-    required: true
-  },
-  time: {
-    type: Date,
-    required: true
-  },
-  transportation: {
-    type: String,
-    required: true,
-    enum: ['train', 'walk', 'bike', 'drive']
-  },
-  currLocation: {
-    lat: {
-      type: Number
+    date: {
+        type: Date,
+        required: true
     },
-    long: {
-      type: Number
-    }
-  },
-  endLocation: {
-    lat: {
-      type: Number,
-      required: true
+    startLocation: {
+        latitude: {
+          type: Number
+        },
+        longitude: {
+          type: Number
+        }
     },
-    long: {
-      type: Number,
-      required: true
+    endLocation: {
+        latitude: {
+            type: Number,
+            required: true
+        },
+        longitude: {
+            type: Number,
+            required: true
+        }
+    },
+    transportation: {
+        type: String,
+        required: true,
+        enum: ['train', 'walk', 'bike', 'drive']
+    },
+    title: {
+        type: String
+    },
+    details: {
+        type: String
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
-  },
-  title: {
-    type: String
-  },
-  details: {
-    type: String
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
 });
 
 mongoose.model('Event', schema);

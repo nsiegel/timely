@@ -13,6 +13,13 @@ var schema = new mongoose.Schema({
     salt: {
         type: String
     },
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event'
+    }],
+    google: {
+        id: String
+    },
     twitter: {
         id: String,
         username: String,
@@ -21,14 +28,7 @@ var schema = new mongoose.Schema({
     },
     facebook: {
         id: String
-    },
-    google: {
-        id: String
-    },
-    events: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Event'
-    }]
+    }
 });
 
 // method to remove sensitive information from user objects before sending them out

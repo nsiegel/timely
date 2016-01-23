@@ -36,8 +36,7 @@ var seedEvents = function() {
                 lng: -73.7948516
             },
             endLocation: {
-                lat: 40.7050758,
-                lng: -74.0091604
+                place: 'Fullstack Academy'
             },
             transportation: 'drive',
             title: 'First Event',
@@ -50,8 +49,7 @@ var seedEvents = function() {
                 lng: -74.0091604
             },
             endLocation: {
-                lat: 40.7050758,
-                lng: -73.9785551
+                place: '7059 sybilla street'
             },
             transportation: 'train',
             title: 'Second Event',

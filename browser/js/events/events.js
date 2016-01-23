@@ -1,7 +1,17 @@
 app.config(function ($stateProvider) {
-  $stateProvider.state('events', {
-    url: '/events',
-    templateUrl: '/js/events/events.html',
+  $stateProvider.state('add-event', {
+    url: '/add-event',
+    templateUrl: '/js/events/add.event.html',
+    controller: 'EventCtrl',
+    resolve: {
+      user: function (AuthService) {
+        return AuthService.getLoggedInUser();
+      }
+    }
+  })
+  $stateProvider.state('my-events', {
+    url: '/my-events',
+    templateUrl: '/js/events/my.events.html',
     controller: 'EventCtrl',
     resolve: {
       user: function (AuthService) {
@@ -11,7 +21,8 @@ app.config(function ($stateProvider) {
   });
 });
 
-app.controller('EventCtrl', function ($scope, EventFactory, user) {
+
+app.controller('EventCtrl', function ($scope, $state, EventFactory, user) {
 
   $scope.user = user;
 
@@ -21,7 +32,11 @@ app.controller('EventCtrl', function ($scope, EventFactory, user) {
   });
 
   $scope.sendEvent = function (eventObj) {
-    EventFactory.createEvent(eventObj);
+    eventObj.user = user._id;
+    EventFactory.createEvent(eventObj)
+    .then(function () {
+      $state.go('my-events');
+    });
   }
 
 });

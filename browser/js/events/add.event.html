@@ -1,5 +1,5 @@
 <!-- TODO: change login-form to form in scss -->
-<form id="login-form" name="eventForm" ng-submit="eventForm.$valid && sendEvent(event)">
+<form class='add-event' id="login-form" name="eventForm" ng-submit="eventForm.$valid && sendEvent(event)">
     <alert type="danger" ng-show="error">
         {{ error }}
     </alert>
@@ -33,6 +33,6 @@
         <label for="details">Details</label>
         <textarea type="text" ng-model="event.details" class="form-control" id="event-details" placeholder="optional"></textarea>
     </div>
-    <button type="cancel" class="btn btn-danger">Cancel</button>
-    <button type="submit" class="btn btn-info">Submit</button>
+    <button type="cancel" class="btn btn-default">Cancel</button>
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>

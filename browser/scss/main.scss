@@ -1,4 +1,5 @@
 * {
+  background-color: #dddfd4;
   box-sizing: border-box;
 }
 
@@ -7,6 +8,12 @@ body {
   margin:0; padding:0;
 }
 
+.white-border {
+  border-style: solid;
+  border-width: 30px;
+  color: white;
+  height: 2000px;
+}
 
 @mixin clearfix {
   &:after {
@@ -33,3 +40,4 @@ body {
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+@import 'events/main';

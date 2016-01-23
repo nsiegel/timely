@@ -32,7 +32,8 @@ var schema = new mongoose.Schema({
         enum: ['walk', 'bike', 'drive']
     },
     title: {
-        type: String
+        type: String,
+        default: 'untitled'
     },
     details: {
         type: String

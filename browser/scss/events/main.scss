@@ -1,0 +1,33 @@
+.my-events {
+	width: 60%;
+	margin: 0 auto;
+	.col-sm-3 {
+		position: relative;
+		width: 30%;
+		padding: 1em 1.5em;
+		margin: 1em auto;
+		color: #fff;
+		background: #3fb0ac;
+		padding-right: 0px;
+		margin-right: 20px;
+		p {
+			background: #3fb0ac;
+		}
+	}
+	.col-sm-3:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-width: 0 16px 16px 0;
+		border-style: solid;
+		border-color: #173e43 #dddfd4;
+	}
+}
+.add-event {
+	color: #173e43;
+	button {
+		background-color: #3fb0ac;
+		color: white;
+	}
+}

@@ -1,0 +1,7 @@
+<div class='my-events'>
+	<a ui-sref='home'><div class="col-sm-3" ng-repeat='event in userEvents'>
+		<p>What: {{ event.title || untitled }}</p>
+		<p>When: {{ event.date | date:'MM/dd/yyyy @ h:mma' }}</p>
+		<p>Where: {{ event.endLocation.place }}</p>
+	</div></a>
+</div>

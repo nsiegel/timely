@@ -26,8 +26,9 @@ router.get('/:eventId', function (req, res, next) {
     });
 });
 
-// POST/CREATE /api/events
-router.post('/', function (req, res, next) {
+// POST/CREATE /api/events/add-event
+router.post('/add-event', function (req, res, next) {
+  console.log('route hit!')
   var date = req.body.date.split('T')[0].split('-');
   var month = Number(date[1]) - 1;
   var day = Number(date[2]);

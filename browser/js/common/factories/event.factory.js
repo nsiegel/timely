@@ -22,14 +22,14 @@ app.factory('EventFactory', function ($http) {
 			});
 		},
 		createEvent: function (eventObj) {
-			return $http.post('/api/events', eventObj)
+			return $http.post('/api/events/add-event', eventObj)
 			.then(function (event) {
 				return event.data;
 			});
 		},
 		sendEmail: function (eventData, next) {
 			console.log(eventData);
-			$http.post('/api/mandrill', eventData)
+			$http.post('/api/email', eventData)
 			.then(function () {
 				console.log('Email sent?!?!?! (This is the event factory!)');
 			})

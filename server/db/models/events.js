@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+var rp = require('request-promise');
 
 var schema = new mongoose.Schema({
     date: {

@@ -15,6 +15,9 @@ var schema = new mongoose.Schema({
         }
     },
     endLocation: {
+        place: {
+          type: String
+        },
         lat: {
             type: Number
             // required: true

@@ -26,6 +26,14 @@ app.factory('EventFactory', function ($http) {
 			.then(function (event) {
 				return event.data;
 			});
+		},
+		sendEmail: function (eventData, next) {
+			console.log(eventData);
+			$http.post('/api/mandrill', eventData)
+			.then(function () {
+				console.log('Email sent?!?!?! (This is the event factory!)');
+			})
+			.then(null, next);
 		}
 	}
 });

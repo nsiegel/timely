@@ -1,5 +1,5 @@
 module.exports = {
-  "DATABASE_URI": "mongodb://wnmprk:hinicole@ds047345.mongolab.com:47345/timely",
+  "DATABASE_URI": "mongodb://wnmprk:wonmipark@ds049945.mongolab.com:49945/timely",
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "TWITTER": {
     "consumerKey": "INSERT_TWITTER_CONSUMER_KEY_HERE",
@@ -15,5 +15,8 @@ module.exports = {
     "clientID": "INSERT_GOOGLE_CLIENTID_HERE",
     "clientSecret": "INSERT_GOOGLE_CLIENT_SECRET_HERE",
     "callbackURL": "INSERT_GOOGLE_CALLBACK_HERE"
+  },
+  "MANDRILL": {
+    "key": "0h3CCNLlpNIIalSF4dN8xg"
   }
 };

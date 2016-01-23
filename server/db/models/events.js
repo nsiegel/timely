@@ -21,17 +21,15 @@ var schema = new mongoose.Schema({
         },
         lat: {
             type: Number
-            // required: true
         },
         lng: {
             type: Number
-            // required: true
         }
     },
     transportation: {
         type: String,
-        // required: true,
-        enum: ['train', 'walk', 'bike', 'drive']
+        required: true,
+        enum: ['walk', 'bike', 'drive']
     },
     title: {
         type: String
@@ -42,6 +40,11 @@ var schema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    active: {
+        type: Boolean,
+        default: true,
+        required: true
     }
 });
 

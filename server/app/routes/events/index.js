@@ -28,10 +28,19 @@ router.get('/:eventId', function (req, res, next) {
 
 // POST/CREATE /api/events
 router.post('/', function (req, res, next) {
-  var day = req.body.date.split('/');
+  var date = req.body.date.split('T')[0].split('-');
+  var month = Number(date[1]) - 1;
+  var day = Number(date[2]);
+  var year = Number(date[0]);
+
   var time = req.body.time.split(':');
-  var date = new Date(day[2], day[0], day[1], time[0],time[1]);
-  req.body.date = date;
+  var hour = time[0];
+  var minutes = time[1];
+
+  var eventDate = new Date(year, month, day, hour, minutes);
+
+  req.body.date = eventDate;
+
   Event.create(req.body)
     .then(function (createdEvent) {
       res.status(201).json(createdEvent);

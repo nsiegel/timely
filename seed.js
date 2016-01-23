@@ -51,7 +51,7 @@ var seedEvents = function() {
             endLocation: {
                 place: '7059 sybilla street'
             },
-            transportation: 'train',
+            transportation: 'walk',
             title: 'Second Event',
             details: 'Yay! this is my second event'
         }

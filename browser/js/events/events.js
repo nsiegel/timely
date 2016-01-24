@@ -23,12 +23,18 @@ app.config(function ($stateProvider) {
 
 
 app.controller('EventCtrl', function ($scope, $state, $stateParams, EventFactory, user) {
-
   $scope.user = user;
 
   EventFactory.getAllUserEvents(user._id)
   .then(function (events) {
     $scope.allEvents = events;
+    for (var i = 0; i < $scope.allEvents.length; i++) {
+      var when = Date.parse($scope.allEvents[i].date) - Date.now();
+      // set to notify five minutes before an event
+      if (when <= 300000 && when > 0) {
+        notifyMe();
+      }
+    }
   })
 
   $scope.sendEvent = function (eventObj) {

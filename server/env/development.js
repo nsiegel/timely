@@ -18,5 +18,8 @@ module.exports = {
   },
   "MANDRILL": {
     "key": "0h3CCNLlpNIIalSF4dN8xg"
+  },
+  "GCM": {
+    "key": "AIzaSyDQRkD5rq52rXP-Eli6-Icmtal4zE0szBM"
   }
 };

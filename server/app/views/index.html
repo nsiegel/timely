@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="/" />
     <meta charset='utf-8' />
@@ -7,6 +8,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="manifest" href="manifest.json">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.4/mapbox-gl.css' rel='stylesheet' />
     <script src="/lodash/index.js"></script>
     <script src="/angular/angular.js"></script>
@@ -18,10 +20,38 @@
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
 </head>
+
 <body ng-app="FullstackGeneratedApp">
     <div class='white-border'>
         <navbar></navbar>
         <div id="main" ui-view></div>
     </div>
+    <script>
+    function notifyMe() {
+        // Let's check if the browser supports notifications
+        if (!("Notification" in window)) {
+            alert("This browser does not support system notifications");
+        } else if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            var n = {
+                body: 'leave now to be on timely!',
+                icon: 'http://i.imgur.com/am171kR.png'
+            }
+
+            var notification = new Notification('timely', n);
+        }
+
+        // Otherwise, we need to ask the user for permission
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function(permission) {
+                // If the user accepts, let's create a notification
+                if (permission === "granted") {
+                    var notification = new Notification("Hi there!");
+                }
+            });
+        }
+    }
+    </script>
 </body>
+
 </html>

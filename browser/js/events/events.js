@@ -19,10 +19,10 @@ app.config(function ($stateProvider) {
       }
     }
   })
-  $stateProvider.state('single-event', {
-    url: '/my-events/:eventId',
-    templateUrl: '/js/events/single.event.html',
-  })
+  // $stateProvider.state('single-event', {
+  //   url: '/my-events/:eventId',
+  //   templateUrl: '/js/events/single.event.html',
+  // })
 });
 
 

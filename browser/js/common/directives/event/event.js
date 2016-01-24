@@ -8,7 +8,7 @@ app.directive('oneEvent', function ($state) {
 		link: function (scope, element, attributes) {
 			element.on('click', function () {
 				$state.go('single-event', { eventId: scope.event._id })
-			});
+			})
 		}
 	}
 });

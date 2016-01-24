@@ -1,0 +1,6 @@
+<!-- <a style='cursor: pointer;' ui-sref='map({eventId: event._id})'> -->
+	<div class="col-sm-3">
+		<p>What: {{ event.title }}</p>
+		<p>When: {{ event.date | date:"MM/dd/yyyy @ h:mma" }}</p>
+		<p>Where: {{ event.endLocation.place }}</p>
+	</div>

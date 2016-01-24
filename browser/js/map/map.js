@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
   $stateProvider.state('map', {
-    url: '/map',
+    url: '/my-events/:eventId/map',
     templateUrl: '/js/map/map.html',
     controller: 'MapCtrl'
   })

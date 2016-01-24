@@ -6,6 +6,12 @@ app.factory('EventFactory', function ($http) {
 				return events.data;
 			});
 		},
+		getOneEvent: function () {
+			return $http.get('/api/events' + eventId)
+			.then(function (event) {
+				return event.data;
+			});
+		},
 		getAllUserEvents: function (userId) {
 			return $http.get('/api/users/' + userId + '/events')
 			.then(function (usersEvents) {
@@ -17,8 +23,9 @@ app.factory('EventFactory', function ($http) {
 		},
 		getOneUserEvent: function (userId, eventId) {
 			return $http.get('/api/users/' + userId + '/events/' + eventId)
-			.then(function (usersEvent) {
-				return usersEvent.data;
+			.then(function (oneEvent) {
+				console.log(userId, eventId)
+				return oneEvent.data;
 			});
 		},
 		createEvent: function (eventObj) {

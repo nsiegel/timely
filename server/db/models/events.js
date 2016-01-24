@@ -36,7 +36,8 @@ var schema = new mongoose.Schema({
         default: 'untitled'
     },
     details: {
-        type: String
+        type: String,
+        default: 'none'
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

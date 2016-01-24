@@ -21,6 +21,7 @@ navbar {
   }
 
   .nav > li > a {
+    font-size: 20px;
     cursor: pointer;
     transition: color 0.2s;
     &.active {
@@ -41,6 +42,11 @@ navbar {
     background: none;
     outline: none !important;
     color: #173e43;
+    font-size: 20px;
+    &:hover {
+      background: none;
+      color: white;
+    }
   }
 
   .welcome {
@@ -52,8 +58,14 @@ navbar {
       margin-right: 5px;
     }
     a {
+      font-size: 20px;
       color: #173e43;
       cursor: pointer;
+      &:hover {
+        background: none;
+        color: white;
+        text-decoration: none;
+      }
     }
   }
 

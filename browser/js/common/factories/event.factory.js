@@ -21,11 +21,10 @@ app.factory('EventFactory', function ($http) {
 				console.error(err);
 			});
 		},
-		getOneUserEvent: function (userId, eventId) {
-			return $http.get('/api/users/' + userId + '/events/' + eventId)
-			.then(function (oneEvent) {
-				console.log(userId, eventId)
-				return oneEvent.data;
+		getOneUserEvent: function (eventId) {
+			return $http.get('/api/events/' + eventId)
+			.then(function (usersEvent) {
+				return usersEvent.data;
 			});
 		},
 		createEvent: function (eventObj) {

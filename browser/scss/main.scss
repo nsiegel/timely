@@ -29,10 +29,15 @@ body {
 }
 
 #map {
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:100%;
+    position:absolute;
+    top:125px;
+    bottom:25px;
+    left: 500px;
+    right: 75px;
+    border-style: solid;
+    border-width: 10px;
+    color: white;
+    // width:100%;
 }
 
 @import 'directives/main';

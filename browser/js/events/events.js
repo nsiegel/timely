@@ -19,11 +19,6 @@ app.config(function ($stateProvider) {
       }
     }
   })
-  $stateProvider.state('single-event', {
-    url: '/my-events/:eventId',
-    templateUrl: '/js/events/single.event.html',
-    controller: 'SingleEventCtrl'
-  })
 });
 
 
@@ -44,13 +39,4 @@ app.controller('EventCtrl', function ($scope, $state, $stateParams, EventFactory
     });
   }
 
-});
-
-app.controller('SingleEventCtrl', function ($scope, $stateParams, EventFactory, user) {
-  $scope.user = user;
-  console.log(user._id, $stateParams.eventId)
-  EventFactory.getOneUserEvent(user._id, $stateParams.eventId)
-  .then(function (event) {
-    $scope.oneEvent = event;
-  });
 });

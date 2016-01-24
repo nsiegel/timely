@@ -33,6 +33,15 @@ app.factory('EventFactory', function ($http) {
 				return event.data;
 			});
 		},
+		deleteOne: function (eventId) {
+			return $http.delete('/api/events/' + eventId)
+		},
+		changeOne: function (eventId) {
+			return $http.put('/api/events/' + eventId)
+			.then(function (event) {
+				return event.data;
+			})
+		},
 		sendEmail: function (eventData, next) {
 			console.log(eventData);
 			$http.post('/api/email', eventData)

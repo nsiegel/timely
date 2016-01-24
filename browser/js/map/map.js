@@ -13,9 +13,19 @@ app.config(function($stateProvider) {
             }
         }
     });
+    $stateProvider.state('edit-event', {
+      url: '/edit-event',
+      templateUrl: '/js/events/edit.event.html',
+      controller: 'EventCtrl',
+      resolve: {
+        user: function (AuthService) {
+          return AuthService.getLoggedInUser();
+        }
+      }
+    })
 });
 
-app.controller('MapCtrl', function($scope, $stateParams, currEvent, GeoFactory) {
+app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, GeoFactory, EventFactory) {
     $scope.event = currEvent;
     var currLat;
     var currLng;
@@ -24,6 +34,20 @@ app.controller('MapCtrl', function($scope, $stateParams, currEvent, GeoFactory) 
     var eventLng = currEvent.endLocation.lng;
     var transMethod = currEvent.transportation;
     var directionCoordinatesUrl;
+
+    $scope.deleteEvent = function (eventId) {
+      EventFactory.deleteOne(eventId)
+      .then(function () {
+        $state.go('my-events')
+      });
+    }
+    
+    $scope.editEvent = function (eventId) {
+      EventFactory.changeOne(eventId)
+      .then(function () {
+        $state.go('edit-event')
+      });
+    }
 
     mapboxgl.accessToken = 'pk.eyJ1IjoibnNpZWdlbDIiLCJhIjoiY2lqcHY1OTBuMDFkMXRvbTV3eTZ6MXdycSJ9.AO_LTuXwMnDabyGfYydArw';
     var map = new mapboxgl.Map({

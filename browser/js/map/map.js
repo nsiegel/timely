@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('single-event', {
-        url: 'my-events/:eventId',
+        url: '/my-events/:eventId',
         templateUrl: '/js/events/single.event.html',
         controller: 'MapCtrl',
         resolve: {
@@ -41,7 +41,7 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
         $state.go('my-events')
       });
     }
-    
+
     $scope.editEvent = function (eventId) {
       EventFactory.changeOne(eventId)
       .then(function () {
@@ -54,10 +54,43 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
         container: 'map', // container id
         style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
         center: [eventLng, eventLat], // starting position
-        zoom: 15, // starting zoom
+        zoom: 14 // starting zoom
     });
 
     map.on('style.load', function () {
+        map.addSource("markers", {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [eventLng, eventLat]
+                    },
+                    "properties": {
+                        "title": "Event Location",
+                        "marker-symbol": "star",
+                    }
+                }]
+            }
+        });
+
+        map.addLayer({
+            "id": "markers",
+            "type": "symbol",
+            "source": "markers",
+            "layout": {
+                "icon-image": "{marker-symbol}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+            },
+            "paint": {
+                "text-size": 12
+            }
+        });
         return GeoFactory.getGeoLocation()
         .then(function(geoLocation) {
             currLat = geoLocation.coords.latitude;
@@ -66,20 +99,41 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
                 currLng + ',' + currLat + ';' + eventLng + ',' + eventLat + '.json?'+
                 // 'alternatives=false&instructions=html&geometry=polyline&steps=false&&' +
                 'access_token=pk.eyJ1IjoibnNpZWdlbDIiLCJhIjoiY2lqcHY1OTBuMDFkMXRvbTV3eTZ6MXdycSJ9.AO_LTuXwMnDabyGfYydArw';
-            console.log(directionCoordinatesUrl);
-            return GeoFactory.getDirectionCoords(directionCoordinatesUrl);
-        }).then(function(directions) {
-            map.addSource("route", {
+            map.addSource("markers2", {
                 "type": "geojson",
                 "data": {
-                    "type": "Feature",
-                    "properties": {},
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": directions.routes[0].geometry.coordinates
-                    }
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [currLng, currLat]
+                        },
+                        "properties": {
+                            "title": "You Are Here",
+                            "marker-symbol": "marker",
+                        }
+                    }]
                 }
             });
+
+            map.addLayer({
+                "id": "markers2",
+                "type": "symbol",
+                "source": "markers2",
+                "layout": {
+                    "icon-image": "{marker-symbol}-15",
+                    "text-field": "{title}",
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 0.6],
+                    "text-anchor": "top"
+                },
+                "paint": {
+                    "text-size": 12
+                }
+            });
+            return GeoFactory.getDirectionCoords(directionCoordinatesUrl);
+        }).then(function(directions) {
             function fly() {
                 // Fly to a random location by offsetting the point -74.50, 40
                 // by up to 5 degrees.
@@ -88,21 +142,60 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
                 });
             }
             fly();
-
-            map.addLayer({
-                "id": "route",
-                "type": "line",
-                "source": "route",
-                "layout": {
-                    "line-join": "round",
-                    "line-cap": "round"
-                },
-                "paint": {
-                    "line-color": "rgb(231, 78, 152)",
-                    "line-width": 5
-                }
-            });
+            animate(directions.routes[0].geometry.coordinates)
+            // map.addSource("route", {
+            //     "type": "geojson",
+            //     "data": {
+            //         "type": "Feature",
+            //         "properties": {},
+            //         "geometry": {
+            //             "type": "LineString",
+            //             "coordinates": directions.routes[0].geometry.coordinates
+            //         }
+            //     }
+            // });
+            // map.addLayer({
+            //     "id": "route",
+            //     "type": "line",
+            //     "source": "route",
+            //     "layout": {
+            //         "line-join": "round",
+            //         "line-cap": "round"
+            //     },
+            //     "paint": {
+            //         "line-color": "rgb(231, 78, 152)",
+            //         "line-width": 5
+            //     }
+            // });
 
         });
     });
+
+    function animate (coords) {
+        map.addSource("route", {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": coords
+                }
+            }
+        });
+        map.addLayer({
+            "id": "route",
+            "type": "line",
+            "source": "route",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "rgb(231, 78, 152)",
+                "line-width": 5
+            }
+        });
+
+    }
 });

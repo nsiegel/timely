@@ -16,7 +16,6 @@
 		}
 	}
 	.col-sm-3:before {
-		content: "";
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -40,6 +39,9 @@
 	.col-sm-3 {
 		width: 400px;
 	}
+    .big {
+        font-size: 17px;
+    }
 	button {
 		background-color: #3fb0ac;
 		color: white;

@@ -34,7 +34,6 @@ router.get('/:userId/events', function (req, res, next) {
   var id = req.params.userId;
   Event.find({ user: id }).populate('user').exec()
     .then(function (events) {
-      console.log(events)
       res.status(200).json(events);
     }).then(null, function (err) {
       err.message = "Something went wrong finding user's events!";

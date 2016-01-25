@@ -21,7 +21,6 @@ app.config(function($stateProvider) {
     })
 });
 
-
 app.controller('EventCtrl', function($scope, $state, $stateParams, EventFactory, user) {
 
     function notifyMe() {
@@ -66,9 +65,11 @@ app.controller('EventCtrl', function($scope, $state, $stateParams, EventFactory,
     $scope.sendEvent = function(eventObj) {
         eventObj.user = user._id;
         EventFactory.createEvent(eventObj)
-            .then(function() {
+            .then(function(event) {
+                console.log('im adding event ', event);
+                Socket.emit('reminders', event)
+
                 $state.go('my-events');
             });
     }
-
 });

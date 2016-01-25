@@ -26,6 +26,18 @@
         <navbar></navbar>
         <div id="main" ui-view></div>
     </div>
+    <script>
+        Notification.requestPermission();
+        var Socket = io(window.location.origin);
+        Socket.on('remind', function(data) {
+            console.log("index.html: ", data);
+            var notify = new Notification('Leave now to be on timely!', data);
+            notify.onclick = function() {
+                window.open('localhost:1337/my-events/' + data.id);
+            }
+            return notify;
+        });
+    </script>
 </body>
 
 </html>

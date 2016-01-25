@@ -1,5 +1,6 @@
 <div class="col-sm-3">
-	<p>What: {{ event.title }}</p>
+	<p ng-show='event.title'>What: {{ event.title }}</p>
+	<p ng-show='!event.title'>What: untitled</p>
 	<p>When: {{ event.date | date:"MM/dd/yyyy @ h:mma" }}</p>
 	<p>Where: {{ event.endLocation.place }}</p>
 </div>

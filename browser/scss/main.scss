@@ -29,16 +29,13 @@ body {
 }
 
 #map {
-    position:absolute;
-    top:125px;
-    bottom:25px;
+    position: absolute;
+    top: 125px;
+    bottom: 25px;
     left: 500px;
     right: 75px;
-    border-style: solid;
-    border-width: 10px;
-    border-color: #173e43;
+    border: 5px solid #3fb0ac;
     color: white;
-    // width:100%;
 }
 
 @import 'directives/main';

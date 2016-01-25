@@ -8,8 +8,8 @@
 		margin: 1em auto;
 		color: #fff;
 		background: #3fb0ac;
-		padding-right: 0px;
-		margin-right: 20px;
+		padding-right: 30px;
+		margin-right: 10px;
 		cursor: pointer;
 		p {
 			background: #3fb0ac;
@@ -36,10 +36,17 @@
 	.add-color {
 		color: #173e43;
 		padding: 0;
-		margin-left: 50px;
+	}
+	.col-sm-3 {
+		width: 400px;
 	}
 	button {
 		background-color: #3fb0ac;
 		color: white;
+		margin-top: 20px;
+	}
+	.buttons {
+		margin-top: 100px;
+		margin-left: 20px;
 	}
 }

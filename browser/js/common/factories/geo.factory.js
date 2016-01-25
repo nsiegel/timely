@@ -20,7 +20,6 @@ app.factory('GeoFactory', function($window, $q, $http) {
         getDirectionCoords: function(url) {
             return $http.get(url)
             .then(function(res) {
-                console.log(res.data)
                 return res.data;
             }).then(null, console.err);
         }

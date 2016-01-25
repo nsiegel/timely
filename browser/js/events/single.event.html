@@ -1,14 +1,12 @@
 <div class='single-event'>
 	<div class="container-fluid">
 	  <div class="row-fluid">
-	    <div class="span2">
-	      <one-event event="event" class='add-color'></one-event>
+	    <div class="col-xs-10">
+	      <one-event event="event" class='add-color big'></one-event>
 	      <button ng-click='editEvent(event._id)' type="edit" class="btn btn-default">Edit</button>
 	      <button ng-click='deleteEvent(event._id)' type="delete" class="btn btn-default">Delete</button>
 	    </div>
-	    <div class="span10">
-	      <div id="map"></div>
-	    </div>
+	    <div id="map"></div>
 	  </div>
 	</div>
 </div>

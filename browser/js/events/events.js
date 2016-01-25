@@ -21,7 +21,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('EventCtrl', function($scope, $state, $stateParams, EventFactory, user) {
+app.controller('EventCtrl', function($scope, $state, $stateParams, Socket, EventFactory, user) {
 
     function notifyMe() {
         // Let's check if the browser supports notifications
@@ -68,7 +68,6 @@ app.controller('EventCtrl', function($scope, $state, $stateParams, EventFactory,
             .then(function(event) {
                 console.log('im adding event ', event);
                 Socket.emit('reminders', event)
-
                 $state.go('my-events');
             });
     }

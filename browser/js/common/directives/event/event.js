@@ -5,7 +5,7 @@ app.directive('oneEvent', function ($state) {
 		scope: {
 			event: '='
 		},
-		link: function (scope, element, attributes) {
+		link: function (scope, element) {
 			element.on('click', function () {
 				$state.go('single-event', { eventId: scope.event._id })
 			})

@@ -57,7 +57,7 @@ router.get('/:userId/events/:eventId', function (req, res, next) {
 // POST/CREATE /api/users/
 router.post('/', function (req, res, next) {
   User.create(req.body)
-    .then(function (createduser) {
+    .then(function (createdUser) {
       res.status(201).json(createdUser);
     }).then(null, function (err) {
       err.message = "Something went wrong creating a user!";

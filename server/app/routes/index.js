@@ -5,7 +5,6 @@ module.exports = router;
 router.use('/members', require('./members'));
 router.use('/events', require('./events'));
 router.use('/users', require('./users'));
-router.use('/email', require('./email'));
 
 // Make sure this is after all of
 // the registered routes!

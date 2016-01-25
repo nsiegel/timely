@@ -32,7 +32,7 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
     // var remind = true;
     var eventLat = currEvent.endLocation.lat;
     var eventLng = currEvent.endLocation.lng;
-    var transMethod = currEvent.transportation;
+    // var transMethod = currEvent.transportation;
     var directionCoordinatesUrl;
 
     $scope.deleteEvent = function (eventId) {
@@ -56,7 +56,34 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
         center: [eventLng, eventLat], // starting position
         zoom: 14 // starting zoom
     });
+    function animate (coords) {
+        map.addSource("route", {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": coords
+                }
+            }
+        });
+        map.addLayer({
+            "id": "route",
+            "type": "line",
+            "source": "route",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "rgb(231, 78, 152)",
+                "line-width": 5
+            }
+        });
 
+    }
+    
     map.on('style.load', function () {
         map.addSource("markers", {
             "type": "geojson",
@@ -171,31 +198,4 @@ app.controller('MapCtrl', function ($scope, $state, $stateParams, currEvent, Geo
         });
     });
 
-    function animate (coords) {
-        map.addSource("route", {
-            "type": "geojson",
-            "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": coords
-                }
-            }
-        });
-        map.addLayer({
-            "id": "route",
-            "type": "line",
-            "source": "route",
-            "layout": {
-                "line-join": "round",
-                "line-cap": "round"
-            },
-            "paint": {
-                "line-color": "rgb(231, 78, 152)",
-                "line-width": 5
-            }
-        });
-
-    }
 });

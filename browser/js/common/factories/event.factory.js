@@ -6,7 +6,7 @@ app.factory('EventFactory', function ($http) {
 				return events.data;
 			});
 		},
-		getOneEvent: function () {
+		getOneEvent: function (eventId) {
 			return $http.get('/api/events' + eventId)
 			.then(function (event) {
 				return event.data;

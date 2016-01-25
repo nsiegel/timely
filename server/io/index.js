@@ -22,7 +22,7 @@ module.exports = function (server) {
                     body: 'click here to see event details',
                     icon: 'http://i.imgur.com/am171kR.png'
                 });
-            }, send_time * 1000);
+            }, send_time * 30000);
         });
     });
 
